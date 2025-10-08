@@ -1,0 +1,121 @@
+mkdir Exercice1
+cd Exercice1/
+ls
+wget http://plurital.org/ppe1/seance1/archive-38.zip
+ls
+unzip --help
+unzip archive-38.zip
+ls
+man mkdir 
+cd Exercice1
+ls
+mkdir --help
+man mkdir
+cd Exercice1
+mkdir txt ann img docs 
+ls
+mv EnergieEolienne.* docs/
+ls docs/
+mkdir cd txt/
+ls
+cd txt/
+ls
+mkdir 2016 2017 2018
+ls
+cd ann/
+cd Exercice1
+cd ..
+cd ann/
+ls
+mkdir 2016 2017 2018
+ls
+cd ..
+ls
+cd ann
+ls
+cd ..
+ls
+tree
+ls *.txt
+ls 2016*txt
+cd txt
+ls
+cd 2016
+mv ../../2016*.txt 
+ls
+ls 2016
+tree
+mv ./../2016*.txt 
+mv ../../2016*.txt/ 
+../../2016*txt
+../../2016*txt ./
+../../2016*.txt ./
+mv ../../2016*.txt ./
+ls
+cd ../../
+ls 2016*.txt
+ls 2017*.txt
+mv /Users/markogeuseppepineroscrespo/Exercice1/txt 2017*txt/
+mv /Users/markogeuseppepineroscrespo/Exercice1/txt 2017*txt ./
+cd txt
+ls
+cd 2017
+ls
+../../
+cd ../
+cd../
+cd ../
+mv /Users/markogeuseppepineroscrespo/Exercice1/txt 2017*.txt
+mv /Users/markogeuseppepineroscrespo/Exercice1/txt 2017*.txt/
+mv /Users/markogeuseppepineroscrespo/Exercice1/txt 2017*.txt ./
+mv /Users/markogeuseppepineroscrespo/Exercice1/2017*.txt ./txt
+cd txt
+cd 2017
+ls
+ls
+ls 2017
+ls
+txt
+../txt
+cd ../
+ls
+mv /Users/markogeuseppepineroscrespo/Exercice1/txt 2017*.txt ./2017
+mv /Users/markogeuseppepineroscrespo/Exercice1/txt/2017*.txt ./2017
+mv /Users/markogeuseppepineroscrespo/Exercice1/txt/2017*.txt ./2017
+history
+clear
+ls .ssh
+clear
+cd ../../
+clear
+ls .ssh
+cat .ssh/id_ed25519.pub
+cat .ssh/id.pub
+git clone git@github.com:YoannDupont/PPE1-2526.git
+ls
+cd PPE1-2526
+ls
+git pull
+clear
+clear
+git clone git@github.com:markogeuseppe/git.along.git
+cd git.along/
+git status
+ls
+cat README.md
+echo "Une modification."
+echo "Une modification." >> README.md
+cat README.md
+git status
+git add README.md
+git status
+git commit -m "Modification readme."
+git config user.email "pineroscrespo@gmail.com"
+git config user.name "markogeuseppe"
+git commit 
+git commit -m "Modification readme."
+git push
+git log
+git tag -m "test tag" MonPremierTag
+git push origin MonPremierTag
+clear

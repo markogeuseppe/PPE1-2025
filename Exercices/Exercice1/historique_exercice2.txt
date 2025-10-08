@@ -1,0 +1,16 @@
+  439  mkdir Taipei Kyoto
+  440  ls
+  441  cd Taipei
+  442  mv ../../*Taipei* ./
+  443  ls
+  444  cd ../
+  445  ls
+  446  cd Kyoto
+  447  mv ../../*kyoto* ./
+  448  mv ../../*Kyoto* ./
+  449  ls
+  450  cd ../../
+  451  ls
+  452  tree
+  453  history
+  454  grep -A 1000 "mkdir Exercice1" ~/.zsh_history > ~/Exercice1/historique_exercice.txt\n
