@@ -1,11 +1,23 @@
 #!/bin/bash
 
+if [ $# -ne 2 ]
+then
+    echo "Nombre d'arguments incorrect, il en faut 2"
+    exit
+fi
 
-TYPE=$1
-CHEMIN=$2
+TYPE=$2
+CHEMIN=$1
 
-A=$(bash./comptes_par_type.sh $TYPE 2016 $CHEMIN)
-B=$(bash./comptes_par_type.sh $TYPE 2017 $CHEMIN)
-C=$(bash./comptes_par_type.sh $TYPE 2018 $CHEMIN)
+if [ ! -d "$CHEMIN" ]
+then
+    echo "$CHEMIN n'est pas un dossier"
+    exit
+fi
 
-echo " en 2016 : $A, en 2017 : $B, en 2018 : $C"
+A=$(bash ./compte_par_type.sh "$CHEMIN/2016" "$TYPE")
+B=$(bash ./compte_par_type.sh "$CHEMIN/2017" "$TYPE")
+C=$(bash ./compte_par_type.sh "$CHEMIN/2018" "$TYPE")
+
+echo "En 2016 : $A, en 2017 : $B, et en 2018 : $C"
+
