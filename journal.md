@@ -22,3 +22,39 @@ J’ai réussi quand même à suivre l’exemple de script que le professeur Mag
 Alors, avec beaucoup d’aide, j’ai appris qu’en créant une variable « FILES » avec mes arguments CHEMIN, ANNEE et *.ann, j’indique à la machine où chercher et quoi chercher. Ainsi, lorsque j’ai fait « grep Location $FILES », le signe dollar, qui fait référence à la valeur de la variable, permet à la machine de chercher les fichiers selon les indications de chemin et d’année que j’avais données dans la variable « FILES ».
 Ensuite, il y a l’utilisation de la commande **awk**, qui lit le fichier « .ann » ligne par ligne et le divise en colonnes pour travailler avec ces dernières. Dans ce cas, il s’agit de chercher les lieux. Puis, il y a l’option **-F**, qui utilise le tabulateur dans cet exercice **‘\t’**, et **print** pour récupérer les lieux recherchés. Finalement, il y a plusieurs filtres : **sort** va ordonner les lieux par ordre alphabétique,  **uniq -c** (*count*) va compter le nombre de répétitions, **sort -nr** (numerical reverse) va les trier selon la fréquence, et **head** affichera les lieux les plus cités. Pour finir, je n’ai pas osé aller plus loin dans l’exercice et j’ai préféré attendre le retour en cours. Pour moi, ce n’était pas clair ce qu’était la validation des arguments.
 
+## Séance 4 : du 15 au 21 octobre 2025
+Le cours de mercredi a été très clarificateur pour moi. Sans doute, les exemples et les solutions des exercices permettent de mieux comprendre les notions et le fonctionnement de l’univers Unix. En général, le retour m’a permis d’avoir les éléments nécessaires pour corriger et finir le guide des exercices de Bash, je pense, sans erreurs. J’avais fait jusqu’à l’exercice 2 a) et b), et j’avoue que parfois les solutions sont beaucoup plus simples qu’on ne pouvait l’imaginer. Il ne faut pas aller très loin pour trouver les éléments nécessaires pour résoudre un exercice.
+Le problème pour moi, c’est que je n’arrive pas encore à comprendre complètement comment utiliser les fonctions dans certaines circonstances spécifiques. C’est-à-dire que j’apprends qu’une fonction fait quelque chose, mais au moment de la mettre en place pour arriver à un résultat, il y a une logique que je ne sais pas encore comment trouver ou construire, puisque dans le codage il y a des signes, des fonctions, des indentations qui, pour moi, sont très changeants.
+Cependant, je pense que ça va… J’ai réussi à faire la validation des arguments des scripts du guide. J’ai utilisé comme référence l’exemple que les professeurs nous ont donné pendant le cours. J’ai construit deux validations pour chaque script et, dans le script compte_lieux, sur lequel le professeur a travaillé, j’ai ajouté deux validations supplémentaires. Je les ai testées et elles ont marché, donc je suis plutôt content du résultat.
+Ensuite, j’ai fait la boucle demandée, et c’était plutôt cool de voir à nouveau la simplification des scripts pour arriver au même objectif. En revanche, il y a de nombreux éléments nouveaux à mémoriser, comme les « conditions possibles » ou les commandes expr (une calculatrice) ou read. Une chose que j’ai bien aimée, c’est que sur GitHub, dans les commits, on peut voir les modifications des scripts : les ajouts sont signalés en vert et les suppressions en rouge. Donc cela permet de visualiser les différentes étapes du travail effectué.
+D’un autre côté, j’ai aussi appris d’autres choses, comme le fait qu’il n’était pas obligatoire d’utiliser nano, comme je l’avais dit auparavant, pour ouvrir et modifier mon journal. Je peux le faire avec Kate, et c’est largement mieux. Dans Kate, on peut cliquer sur un mot, et il montre où ce mot apparaît ailleurs dans le texte. De plus, l’interface est beaucoup plus conviviale pour modifier et utiliser le guide *Markdown*. J’ai aussi appris qu’en ouvrant un fichier avec Kate, il vaut mieux utiliser le symbole de l'esperluette (&) après le nom du fichier, parce que cela permet de rester sur le même terminal. Comme cette semaine nous avons dû commenter un script dans les diapositives, j’ai utilisé pour la première fois la fonction du *Markdown* pour insérer du code dans le journal. Pour arriver à faire ce commentaire, j’ai créé le script et un fichier .txt avec quelques URLs et d’autres données pour le tester. Voici mon script commenté :
+
+
+```
+#!/usr/bin/bash #Utilisation du shebang pour dire à la machine qu’elle doit exécuter le script avec Bash
+
+if [ $# -ne 1 ] #Ici on établit la condition de nombre d’arguments, dans ce cas est seulement un. On utilise « $# » pour le nombre d’arguments « -ne » (not equal) pour dire que c’est différent du chiffre qu’on met après, dans ce cas un.
+then #ici on dit : alors, si cette condition n’est pas vraie, elle doit afficher le message de la ligne suivante.
+echo "ce programme demande un argument " #Ici c’est le message à afficher pour indiquer à l’utilisateur que c’est un argument. 
+exit #Ici on demande de ne pas continuer de suivre le script parce que la condition n’était pas vraie.
+fi # Utilisation d’un mot miroir pour fermer la condition if. 
+
+FICHIER_URLS=$1. # Ici, on crée une variable avec un nom explicite et on lui donne une valeur. En plus, on fait référence à la valeur de la variable en préfixant le signe dollar, c'est-à-dire qu'elle se connecte avec le premier argument.
+OK=0 #Ici on crée une deuxième variable avec un nom explicite en on lui donne une valeur de zéro. Cela sera un compteur des URLs valides.
+NOK=0 #Ici on crée une troisième variable avec un nom explicite en on lui donne une valeur de zéro. Cela sera un compteur des URLs non valides.
+while read -r LINE ; #Ici on crée une boucle *while* où tant qu’il y a quelque chose à lire dans la variable, on le traite. LINE, c’est une nouvelle variable qui va traiter l’unique argument demandé, probablement un fichier dans lequel on trouvera des URLs et d’autres choses. La « -r » (de raw) c’est pour demander de lire tout sans tenir compte des caractères spécieux comme « \ ».
+
+do #Ici on lui indique les processus qu’elle va faire si la condition antérieure est vraie.
+echo "la ligne : $LINE " #Ici on lui indique d’imprimer une chaîne de caractères plus le contenu lu dans LINE.
+if [[ $LINE =∼ ^https?:// ]] #Ici on établit une deuxième condition dans laquelle on lui demande de tester si les chaînes commencent par http:// ou https:// 
+then #Alors, si elles sont identiques, on lui demande d’imprimer le message de la ligne suivante.
+echo " ressemble à une URL valide " #Le message à imprimer. 
+OK = $ ( expr $OK + 1) # Ici on fait appel à la variable OK de valeur zéro avec le signe dollar et on lui demande d'utiliser *expr*, une calculatrice, pour faire l'addition de zéro plus un. C'est-à-dire augmenter le comptoir chaque fois qu'on trouve une URL valide. 
+else #Alors, si elles ne sont pas valides on lui demande d’imprimer le message de la ligne suivante.
+echo "ne ressemble pas à une URL valide " #Le message à imprimer.
+NOK = $ ( expr $NOK + 1) ) #Ici on fait appel à la variable NOK, aussi de valeur zéro, avec le signe dollar et on lui demande d’utiliser de nouveau *expr* pour faire l’addition de zéro plus un. C’est-à-dire augmenter le comptoir chaque fois qu’on trouve un URL non valide.
+fi #Ici on ferme la condition if.
+done < $FICHIER_URLS #Ici, on ferme la boucle et on lui indique de retourner à la première variable. 
+echo " $OK URLs et $NOK lignes douteuses" # Ici, on lui demande d'imprimer le résumé des comptes faits.
+```
+
