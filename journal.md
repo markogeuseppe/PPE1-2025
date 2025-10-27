@@ -143,4 +143,4 @@ C’est en retournant dans le manuel que j’ai découvert « -o /dev/null », q
 
 Cette modification m’a fait penser à la diapositive 23 de « unix » sur les redirections vers et depuis des fichiers. Après avoir testé plusieurs formes, j’ai compris que c’était après « echo » qu’il fallait demander à la machine de rediriger la sortie standard (stdout) vers un fichier appelé « tableau-fr.tsv », situé dans le dossier « tableaux », comme dans mon script final.
 
-Pour finir, comme je l’ai dit avant, la ligne de code pour compter les mots, je l’ai faite avec « lynx -dump », en y ajoutant l’option de **wc** qu’on avait déjà vue en cours, et j’ai cherché dans le manuel l’option pour compter le nombre de mots : **-w**.
+Pour finir, comme je l’ai dit avant, la ligne de code pour compter les mots, je l’ai faite avec « lynx -dump », en y ajoutant l’option de **wc** qu’on avait déjà vue en cours, et j’ai cherché dans le manuel l’option pour compter le nombre de mots : **-w**. 
