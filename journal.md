@@ -29,7 +29,6 @@ Cependant, je pense que ça va… J’ai réussi à faire la validation des argu
 Ensuite, j’ai fait la boucle demandée, et c’était plutôt cool de voir à nouveau la simplification des scripts pour arriver au même objectif. En revanche, il y a de nombreux éléments nouveaux à mémoriser, comme les « conditions possibles » ou les commandes expr (une calculatrice) ou read. Une chose que j’ai bien aimée, c’est que sur GitHub, dans les commits, on peut voir les modifications des scripts : les ajouts sont signalés en vert et les suppressions en rouge. Donc cela permet de visualiser les différentes étapes du travail effectué.
 D’un autre côté, j’ai aussi appris d’autres choses, comme le fait qu’il n’était pas obligatoire d’utiliser nano, comme je l’avais dit auparavant, pour ouvrir et modifier mon journal. Je peux le faire avec Kate, et c’est largement mieux. Dans Kate, on peut cliquer sur un mot, et il montre où ce mot apparaît ailleurs dans le texte. De plus, l’interface est beaucoup plus conviviale pour modifier et utiliser le guide *Markdown*. J’ai aussi appris qu’en ouvrant un fichier avec Kate, il vaut mieux utiliser le symbole de l'esperluette (&) après le nom du fichier, parce que cela permet de rester sur le même terminal. Comme cette semaine nous avons dû commenter un script dans les diapositives, j’ai utilisé pour la première fois la fonction du *Markdown* pour insérer du code dans le journal. Pour arriver à faire ce commentaire, j’ai créé le script et un fichier .txt avec quelques URLs et d’autres données pour le tester. Voici mon script commenté :
 
-
 ```
 #!/usr/bin/bash #Utilisation du shebang pour dire à la machine qu’elle doit exécuter le script avec Bash
 
@@ -58,3 +57,90 @@ done < $FICHIER_URLS #Ici, on ferme la boucle et on lui indique de retourner à 
 echo " $OK URLs et $NOK lignes douteuses" # Ici, on lui demande d'imprimer le résumé des comptes faits.
 ```
 
+## Séance 5 : du 22 au 27 octobre 2025
+Le cours de la cinquième séance a commencé avec le retour du script. Cela m’a permis d’avoir quelques clarifications, mais en général j’étais plutôt content d’avoir presque tout compris et commenté pour moi-même.
+Après cela, on a travaillé de nouvelles notions, comme le langage de balisage HTML, un outil pour structurer l’information des pages web. On a aussi vu le protocole HTTP, qui permet la communication sur Internet, et enfin Lynx, un navigateur web qu’on ouvre depuis le terminal.
+Nous avons passé plus de temps sur ce dernier, en le téléchargeant avec d’autres outils comme **wget** et **curl**. Le premier, je l’avais déjà installé.
+Un des professeurs a dit que l’affichage était particulièrement intéressant, mais franchement, pour moi c’était plutôt étrange et assez compliqué. Je pense que c’est une question d’habitude, car personnellement j’ai toujours consulté les pages web dans leur interface graphique habituelle, avec l’aide de la souris.
+Nous avons regardé quelques options de **Lynx** et aussi l’utilisation des autres outils. Pour finir le cours, les professeurs nous ont parlé des éditeurs de texte et de leurs fonctionnalités.
+J’utilisais *Kate*, mais je pense que je vais essayer *Helix* dans la prochaine mise à jour de mon journal, pour tester.
+
+À ce propos, j’ai installé le linter *ShellCheck*, dans mon cas avec « brew install shellcheck ». Je ne sais pas pourquoi, mais dans « Diagnostics » de *Kate*, rien ne s’affiche, mais avec la commande du terminal, j’ai eu plusieurs suggestions :
+
+```
+markogeuseppepineroscrespo@wifi-16-13-32 Projet de programmation encadré 1 % shellcheck exercice4.mp
+
+In exercice4.mp line 16:
+      OK=$(expr $OK + 1)
+           ^--^ SC2003 (style): expr is antiquated. Consider rewriting this using $((..)), ${} or [[ ]].
+                ^-^ SC2086 (info): Double quote to prevent globbing and word splitting.
+$(expr $NOK + 1)
+            ^--^ SC2003 (style): expr is antiquated. Consider rewriting this using $((..)), ${} or [[ ]].
+                 ^--^ SC2086 (info): Double quote to prevent globbing and word splitting.
+done < $FICHIER_URLS
+       ^-----------^ SC2086 (info): Double quote to prevent globbing and word splitting.
+
+Did you mean:
+done < "$FICHIER_URLS"
+```
+
+En revanche, pour installer le LSP, je n’ai pas eu de problème avec l’installation de *nodejs* depuis son site web, mais oui avec la commande des diapositives. Comme l’erreur ci-dessous parlait d’un refus du système d’exploitation, j’ai essayé avec **sudo** au début de la commande, puisque **sudo** (superuser do) exécute les commandes comme administrateur, donc la requête est « plus puissante », et cela a marché.
+
+```
+npm error The operation was rejected by your operating system.
+npm error It is likely you do not have the permissions to access this file as the current user
+```
+
+Après avoir fait cette partie, j’ai travaillé sur le "mini-projet". Ensuite, j'explique comment j'y suis arrivé : 
+
+### Exercice 1 : lire les lignes d’un fichier en bash
+
+1. On n’utilise pas « cat » parce qu’il affiche seulement le contenu d’un fichier, mais ne permet pas son traitement ligne par ligne à l’intérieur du script, ce qui est possible avec « while read -r line ».
+   Avec **cat**, on aurait construit une ligne comme celle-ci :
+   ```for LINE in $(cat "$1"); do echo $LINE; done```
+
+2. Pour transformer « urls/fr.txt » en paramètre du script, on le transforme en argument. Pour cela, on crée une variable avant la boucle à laquelle on demande à l’interpréteur de donner la valeur de l’argument avec le signe dollar. À la fin, on ferme la boucle en lui demandant d’imprimer l’argument avec le traitement.
+
+2.1 Pour faire la validation des arguments, on ajoute une condition « if » après le *shebang*, dans laquelle on précise le nombre d’arguments nécessaires pour exécuter le script. On met « exit » avant de fermer la condition « if » pour qu’elle s’arrête si la condition n’est pas remplie.
+
+3. Pour cela, je me suis inspiré de l’exemple de la diapositive 41 des slides « unix ». J’ai donc créé une variable de valeur zéro après ma première variable. Ensuite, j’ai recopié la même ligne dans laquelle, avec la commande **expr**, on lui demande d’augmenter de 1, entre « do » et « echo », c’est-à-dire de générer la liste de nombres.
+   Enfin, j’ai demandé à la machine d’imprimer dans « echo » cette liste avec la ligne respective du fichier des URLs. Pour séparer les valeurs, j’ai laissé une tabulation entre elles, comme ceci : 
+   ``` ${N} ${line} ```
+
+### Exercice 2 : récupérer les métadonnées de collecte
+
+Pour effectuer cet exercice, j’ai commencé par regarder dans le manuel les commandes qu’on n’avait pas testées en cours : **curl -I**, **curl -w** et **curl -s**.
+Dans le manuel est un peu compliqué, car il est très long… Cependant, dans le résultat de « curl --help », il y a une indication vers « curl --help all » pour voir toutes les options. J’ai compris que c’était avec ces options qu’il fallait travailler.
+
+Je ne suis toutefois pas arrivé à trouver la description plus détaillée de ces options dans le terminal avec le manuel ou avec « help ». Mais j’ai remarqué qu’à la fin du manuel de « curl », il y avait un site web ([https://curl.se](https://curl.se)), et j’y suis allé.
+Là, j’ai suivi le chemin « curl / Docs / Tool / man page » et j’ai trouvé les explications, par exemple comment construire le « <format> » de l’option « -w », que je n’avais pas trouvées ailleurs.
+
+Ainsi, j’ai essayé dans le terminal, avec une seule des URLs du fichier « fr.txt », de construire une ligne de code qui puisse me donner le résultat attendu, c’est-à-dire le code HTTP et le type de contenu.
+Pour faire le compte du nombre de mots de la page, j’ai pensé à « -dump » (récupérer le contenu textuel d’une page) et, en conséquence, à « lynx ».
+Je me suis donc dit qu’il fallait faire une nouvelle ligne de code après « curl ».
+
+C’est ainsi que je suis arrivé à :
+```curl <URL> -s -L -w "%{http_code} %{content_type}" -o /dev/null```
+
+L’option -L (location) sert à suivre les redirections, pour éviter les erreurs.
+L’option -s (silent) n’affiche pas le compteur de progression ni les messages d’erreur et ne garde que les données demandées.
+Sans cette option, la commande affiche le message ci-dessous, qui correspond au « compteur de progression » :
+
+```
+% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  246k  100  246k    0     0   391k      0 --:--:-- --:--:-- --:--:--  391k 
+```
+
+Après avoir fait « curl » avec -s et -L, qui extrait les informations du site web sans erreurs et avec les redirections si nécessaire, j’ai utilisé « -w » (write-out) pour demander à la machine de communiquer une information précise.
+Pour cela, on utilise des variables présentes dans le manuel, qu’il faut mettre entre accolades avec un signe de pourcentage devant. Dans ce cas : *http_code* et *content_type*.
+Enfin, avec l’option « -o /dev/null », on peut supprimer tout le contenu HTML du corps de la réponse que « curl » a récupéré, en laissant seulement les données demandées avec « -w ».
+
+Cette partie a été la plus compliquée pour moi, car j’ai d’abord cru que c’était avec cette option que j’allais créer le fichier « tableau-fr.tsv ». Cependant, quand j’ai essayé avec la commande ci-dessous, le fichier était bien créé, mais avec tout le contenu HTML des sites, et non la liste attendue.
+C’est en retournant dans le manuel que j’ai découvert « -o /dev/null », qui m’a permis d’obtenir uniquement les informations dont j’avais besoin.
+
+```INFOS=$(curl ${line} -s -L -w "%{http_code} %{content_type}" | -o ../tableaux/tableau-fr.tsv )```
+
+Cette modification m’a fait penser à la diapositive 23 de « unix » sur les redirections vers et depuis des fichiers. Après avoir testé plusieurs formes, j’ai compris que c’était après « echo » qu’il fallait demander à la machine de rediriger la sortie standard (stdout) vers un fichier appelé « tableau-fr.tsv », situé dans le dossier « tableaux », comme dans mon script final.
+
+Pour finir, comme je l’ai dit avant, la ligne de code pour compter les mots, je l’ai faite avec « lynx -dump », en y ajoutant l’option de **wc** qu’on avait déjà vue en cours, et j’ai cherché dans le manuel l’option pour compter le nombre de mots : **-w**.
