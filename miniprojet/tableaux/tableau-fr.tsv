@@ -1,10 +1,10 @@
-1 https://fr.wikipedia.org/wiki/Robot 200 text/html; charset=UTF-8     7566
-2 https://fr.wikipedia.org/wiki/Robot_de_cuisine 200 text/html; charset=UTF-8     1526
-3 fr.wikipedia.org/wiki/Robot_d%27indexation 200 text/html; charset=UTF-8     2387
-4 https://fr.wikipedia.org/wiki/Bot_informatique 200 text/html; charset=UTF-8     3264
-5 https://fr.wikipedia.org/wiki/Atlas_(robot) 200 text/html; charset=UTF-8     1522
-6 https://roboty.magistry.fr 000         0
-7 https://fr.wikipedia.org/wiki/Robot_(Leonard_de_Vinci) 404 text/html; charset=UTF-8      595
-8 https://fr.wiktionary.org/wiki/robot 200 text/html; charset=UTF-8     6547
-9 https://fr.wikipedia.org/wiki/Protocole_d%27exclusion_des_robots 200 text/html; charset=UTF-8     1453
-10 https://fr.wikipedia.org/wiki/Robotique 200 text/html; charset=UTF-8    15039
+1	https://fr.wikipedia.org/wiki/Robot	UTF-8	    5668
+2	https://fr.wikipedia.org/wiki/Robot_de_cuisine	UTF-8	    1157
+3	fr.wikipedia.org/wiki/Robot_d%27indexation	UTF-8	    1756
+4	https://fr.wikipedia.org/wiki/Bot_informatique	UTF-8	    2577
+5	https://fr.wikipedia.org/wiki/Atlas_(robot)	UTF-8	    1163
+6	https://roboty.magistry.fr	000 	       0
+7	https://fr.wikipedia.org/wiki/Robot_(Leonard_de_Vinci)	UTF-8	     440
+8	https://fr.wiktionary.org/wiki/robot	UTF-8	    4791
+9	https://fr.wikipedia.org/wiki/Protocole_d%27exclusion_des_robots	UTF-8	    1052
+10	https://fr.wikipedia.org/wiki/Robotique	UTF-8	   13011
