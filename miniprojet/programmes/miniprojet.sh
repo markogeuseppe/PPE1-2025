@@ -5,8 +5,9 @@ then
 fi
 urls="$1"
 N=0
-echo "<table>" >> ../tableaux/tableau-fr.html
-echo "<tr><th>N</th><th>URL</th><th>HTTP</th><th>TYPE</th><th>MOTS</th></tr>" >> ../tableaux/tableau-fr.html
+
+echo "<html><head><meta charset=\"UTF-8\"></head><body>
+		<table><tr><th>N</th><th>URL</th><th>HTTP</th><th>TYPE</th><th>MOTS</th></tr>" >> ../tableaux/tableau-fr.html
 while read -r line;
 do
 	N=$(expr $N + 1)
@@ -16,4 +17,4 @@ do
 	MOTS=$(lynx -dump -nolist ${line} | wc -w)
 	echo -e "<tr><td>${N}</td>\t<td>${line}</td>\t<td>${CODE}</td>\t<td>${TYPE}</td>\t<td>${MOTS}</td></tr>">> ../tableaux/tableau-fr.html
 done < "$1"
-echo "</table>">> ../tableaux/tableau-fr.html
+echo "</table></body></html>">> ../tableaux/tableau-fr.html
