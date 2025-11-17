@@ -1,31 +1,95 @@
-Miniprojet : Analyse automatique d’un ensemble d’URL
-Introduction
-Dans le cadre de ce miniprojet, nous avons développé un script Bash capable d’analyser automatiquement une liste d’URL et d’en extraire plusieurs informations. L’objectif était de mettre en place un petit outil simple, mais complet, permettant de tester l’accessibilité de différentes pages web, d’en récupérer les métadonnées principales, puis de présenter le tout sous forme d’un tableau HTML consultable dans un navigateur.
-Le résultat final est un fichier HTML généré automatiquement par le script, qui affiche sous forme de tableau les valeurs collectées pour chaque URL.
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Miniprojet : Analyse automatique d’un ensemble d’URL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/versions/bulma-no-dark-mode.min.css">
+</head>
 
-Vous pouvez consulter ce tableau en cliquant ici.
+<body>
+<section class="section has-background-primary">
+    <div class="container has-background-white">
+        <section class="hero has-text-centered">
+            <div class="hero-body">
+                <h2 class="title">
+                    Miniprojet : Analyse automatique d’un ensemble d’URL
+                </h2>
+            </div>
+        </section>
 
-Description du fonctionnement du script
-Le script prend exactement un argument, qui correspond au fichier contenant la liste d’URL à analyser. Chaque ligne de ce fichier est traitée séparément, ce qui permet de récupérer les types d’informations suivants :
-•	Le numéro de ligne, permettant un repérage simple dans le tableau
-•	L’URL elle-même, pour référence
-•	Le code HTTP retourné par la page (par exemple : 200, 404, 301…)
-•	Le type d’encodage de la page (charset utilisé)
-•	Le nombre de mots présents dans le contenu de la page
-Pour effectuer cette collecte et structurer le traitement, le script utilise plusieurs outils :
-•	validation d’arguments
-•	curl, pour récupérer l’en-tête HTTP et suivre d’éventuelles redirections
-•	lynx, pour extraire le texte brut d’une page HTML
-•	wc, pour compter le nombre de mots
-•	boucle while
-•	variables
-Une fois ces informations extraites, le script génère automatiquement un document HTML contenant un tableau. Chaque ligne du tableau correspond à une URL du fichier d’entrée.
+        <div class="columns is-centered">
+            <div class="column is-8">
 
-Structure et output
-Le fichier HTML produit comprend :
-•	une structure minimale (<html>, <head>, <body>)
-•	un tableau présentant toutes les URL analysées
-•	les colonnes suivantes : numéro, URL, code, encodage, nombre de mots
-Le résultat final est lisible sur n’importe quel navigateur et offre une vue synthétique de l’état des différentes pages web étudiées.
-Conclusion
-Ce miniprojet nous a permis de manipuler plusieurs outils importants de l’environnement Unix (shell, curl, lynx...), mais aussi de comprendre comment automatiser l’analyse de pages web. Le script se veut simple, mais il rassemble toutes les étapes essentielles : lecture d’un fichier, récupération d’informations, traitement des données et génération d’un résultat visuel.
+                <div class="block content">
+                    <h3 class="title has-text-dark has-background-primary info">Introduction</h3>
+
+                    <p>Dans le cadre de ce miniprojet, nous avons développé un script Bash capable 
+                    d’analyser automatiquement une liste d’URL et d’en extraire plusieurs informations. 
+                    L’objectif était de mettre en place un outil simple, mais complet, permettant de tester 
+                    l’accessibilité de différentes pages web, d’en récupérer les métadonnées principales, 
+                    puis de présenter le tout sous forme d’un tableau HTML consultable dans un navigateur.</p>
+
+                    <p>Le résultat final est un fichier HTML généré automatiquement par le script, qui affiche sous forme 
+                    de tableau les valeurs collectées pour chaque URL.</p>
+
+                    <p>Vous pouvez consulter ce tableau en 
+                        <a href="miniprojet/tableaux/tableau-fr.html">cliquant ici.</a>
+                    </p>
+                </div>
+
+                <div class="block content">
+                    <h3 class="title has-text-dark has-background-primary info">Description du fonctionnement du script</h3>
+
+                    <p>Le script prend exactement un argument, qui correspond au fichier contenant la liste d’URL à analyser. 
+                    Chaque ligne de ce fichier est traitée séparément, ce qui permet de récupérer les types d’informations suivants :</p>
+
+                    <ol>
+                        <li>Le numéro de ligne</li>
+                        <li>L’URL analysée</li>
+                        <li>Le code HTTP retourné (200, 404, 301…)</li>
+                        <li>Le type d’encodage (charset)</li>
+                        <li>Le nombre de mots présents dans la page</li>
+                    </ol>
+
+                    <p>Pour effectuer cette collecte, le script utilise plusieurs outils :</p>
+
+                    <ul>
+                        <li>validation d’arguments</li>
+                        <li>curl pour les en-têtes et redirections</li>
+                        <li>lynx pour extraire le texte</li>
+                        <li>wc pour compter les mots</li>
+                        <li>boucle while</li>
+                        <li>variables Bash</li>
+                    </ul>
+
+                    <p>Une fois ces informations extraites, le script génère automatiquement un tableau HTML contenant les résultats.</p>
+                </div>
+
+                <div class="block content">
+                    <h3 class="title has-text-dark has-background-primary info">Structure et output</h3>
+
+                    <p>Le fichier HTML produit comprend :</p>
+                    <ul>
+                        <li>une structure minimale (html, head, body)</li>
+                        <li>un tableau regroupant toutes les URL analysées</li>
+                        <li>les colonnes : numéro, URL, code HTTP, encodage, nombre de mots</li>
+                    </ul>
+
+                    <p>Le résultat final est lisible sur n’importe quel navigateur et offre une vue synthétique des pages étudiées.</p>
+                </div>
+
+                <div class="block content">
+                    <h3 class="title has-text-dark has-background-primary info">Conclusion</h3>
+
+                    <p>Ce miniprojet nous a permis de manipuler plusieurs outils de l’environnement Unix (shell, curl, lynx...), 
+                    mais aussi de comprendre comment automatiser l’analyse de pages web. Le script regroupe toutes les étapes essentielles : 
+                    lecture d’un fichier, récupération d’informations, traitement des données et génération d’un résultat visuel.</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

@@ -11,11 +11,15 @@ fichier_urls=$1
 echo "<html>
 	<head>
 		<meta charset=\"UTF-8\">
+    <title>Miniprojet : Analyse automatique d’un ensemble d’URL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/versions/bulma-no-dark-mode.min.css">
 	</head>
 
-	<body>
-		<table>
-			<tr>
+	<body class="has-background-white">
+	<h1>Miniprojet : Analyse automatique d’un ensemble d’URL</h1>
+		<table class="table is-bordered">
+			<tr class= "is-primary">
 				<th>numero</th>
 				<th>URL</th>
 				<th>code</th>
@@ -48,7 +52,8 @@ do
 	lineno=$(expr $lineno + 1)
 done < $fichier_urls
 
-echo "		</table>
+echo "
+	</table>
 	</body>
 </html>"
 
