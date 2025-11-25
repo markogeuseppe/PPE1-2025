@@ -163,3 +163,33 @@ Pour l’activité de la page web, la première chose que j’ai faite a été d
 Une fois que j’ai vu que la page « fonctionnait », j’ai ouvert tous les fichiers du dossier « HTML-CSS » et je m’en suis servi comme guide pour créer le balisage de la page principale du mini-projet. À chaque modification, j’ouvrais « index.html » dans un navigateur pour voir le rendu. Ensuite, j’ai fait la même chose avec les fichiers du dossier « DemoBulma ». Ça m’a pris beaucoup plus de temps pour comprendre comment Bulma fonctionnait et ce que je pouvais modifier en me basant sur la doc du site. Finalement, le résultat m’a vraiment plu. Je trouve assez incroyable de commencer à comprendre comment on organise le contenu d’une page web. J’imaginais ça beaucoup plus compliqué. Je sais que pour l’instant on est dans quelque chose de simple, et qu’il y aura sûrement des choses bien plus difficiles, mais je suis content de commencer à apprendre.
 La partie la plus compliquée a été d’ajouter le lien vers le tableau dans la page principale. Je pensais qu’il fallait refaire tout le processus de création de page web avec le script, mais ce n’était pas possible puisque le dépôt avait déjà une page. Après quelques recherches sur Internet, je me suis rendu compte qu’avec le chemin relatif vers le fichier du script, ça fonctionnait, donc je l’ai laissé comme ça. J’ai ensuite modifié le script pour qu’il soit cohérent dans la mise en forme avec la page principale du projet. J’ai aussi ajouté le titre de ma page dans la sous-page du tableau pour lui donner un petit plus. Bien sûr, j’ai ajouté tout au dépôt, je l’ai poussé sur GitHub et j’ai créé le tag de la remise.
 
+## Séance 8 : du 19 au 25 novembre 2025
+Cette séance, on a commencé avec un petit retour sur l’exercice précédent, c’est-à-dire la page web de GitHub. On a aussi travaillé les expressions régulières et on a appris à extraire, avec l’une d’elles, plusieurs URL construites de façons différentes. Ensuite, on a travaillé Git et les problèmes de synchronisation ainsi que leur gestion lorsqu’on travaille à plusieurs personnes sur un dépôt. Cela me fait un peu peur, pour être honnête, et j’avoue que je trouve cela assez compliqué à comprendre et à résoudre. J’imagine que c’est pour cela que les professeurs nous ont envoyé un exercice à faire pour nous familiariser avec cette dynamique, que l’on retrouvera dans notre projet final.
+Pour la première commande de l’exercice, j’ai obtenu le résultat suivant :
+```
+(base) markogeuseppepineroscrespo@MacBook-Air-de-Marko git.along % git checkout .
+Updated 0 paths from the index
+```
+Donc, je comprends que c’est normal parce que je n’avais pas encore fait de modifications dans ce dossier, donc la commande me répond qu’il n’y a rien à annuler. Après, j’ai copié-collé les paragraphes de *lorem ipsum* dans le fichier README.md en utilisant Kate. Puis j’ai poussé avec le commit « Modification lorem ipsum ». L’étape suivante était d’aller sur GitHub pour supprimer le premier paragraphe. Ici, j’ai appris qu’il faut cliquer sur le nom du fichier puis sur l’icône du crayon, et non sur le nom du commit. Les deux options permettent d’afficher le contenu, mais seulement avec la première on peut modifier. Ensuite, il faut cliquer sur « Commit changes... », où une nouvelle fenêtre s’ouvre pour valider la modification. Ici, j’ai utilisé le commit « GITHUB Modification lorem ipsum README.md ».
+L’exercice demande ensuite de modifier, dans le terminal, le fichier README.md avec la commande « echo » et d’essayer de pousser après, mais comme prévu, il y a une erreur de synchronisation avec le dépôt. L’erreur que j’ai eue est la suivante :
+```
+(base) markogeuseppepineroscrespo@MacBook-Air-de-Marko git.along % git push
+Enter passphrase for key '/Users/markogeuseppepineroscrespo/.ssh/id_ed25519': 
+To github.com:markogeuseppe/git.along.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'github.com:markogeuseppe/git.along.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+```
+Ici, la machine me dit effectivement qu’il n’y a pas de synchronisation entre mon dépôt local et le dépôt GitHub, que le changement a été refusé, elle me donne la cause et me « conseille » de faire un « git pull » avant de pousser quelque chose, ainsi que de consulter l’aide pour plus d’informations. Donc, lorsque j’ai fait « git fetch » puis « git status », la machine me dit : « Your branch and 'origin/main' have diverged, and have 1 and 1 different commits each, respectively. », alors j’ai un commit de différence, c’est-à-dire le commit que j’ai fait tout à l’heure sur GitHub : « GITHUB Modification lorem ipsum README.md ».
+Après cela, il faut faire le « git reset », qui nous donne le message suivant :
+```
+(base) markogeuseppepineroscrespo@MacBook-Air-de-Marko git.along % git reset HEAD~1
+Unstaged changes after reset:
+M    README.md
+```
+« Unstaged changes after reset » me dit que la commande est revenue au commit d’avant, mais sans effacer mes modifications dans le fichier indiqué. Donc il faut enregistrer mes modifications de côté, les mettre « sous le tapis », comme on l’avait dit en cours. Si on fait « git status », il nous dit que README.md a été modifié, et on le voit dans le terminal en rouge, pas en vert comme après un « git add ». Avec « git diff », on verra précisément les modifications effectuées, en vert dans le fichier. Et c’est avec « git stash » que l’on mettra finalement ces modifications de côté, le temps de resynchroniser le dépôt et de réappliquer les changements. J’ai utilisé la commande suivante : « git stash push -m "Sous le tapis" », pour donner un nom à ce que j’enregistre dans la liste des stash. Avec « git stash list », je vois bien cet élément nommé « Sous le tapis ».
+Une fois que j’ai mis la modification de côté, « git status » me dit qu’il n’y a rien à committer. Donc, à ce moment-là, je suis dans l’ancien commit de Git et pas synchronisé avec ce que j’ai fait sur GitHub. Je peux donc faire un git pull pour récupérer les modifications depuis GitHub et les amener dans mon dépôt local pour être finalement synchronisé. Avec « git stash pop », je réappliquerai ensuite mes modifications mises de côté dans mon dépôt, qui sera alors à jour, en éliminant le stash. Après, il faudra faire un « git add . » pour ajouter tous les fichiers modifiés, puis il ne restera plus qu’à faire le commit et pousser.
